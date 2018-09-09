@@ -15,10 +15,13 @@
 		<div class="navbar-brand font-weight-bold">RPS</div>
 		<ul class="navbar-nav ml-auto">
 			<li class="nav-item">
-				<a href="" class="nav-link" id="showSignUp" data-toggle="modal" data-target="#signUpModal">Sign Up</a>
+				<a href="" class="nav-link" id="showSignUp" data-toggle="modal" data-target="#signUpModal"><strong>Register</strong></a>
 			</li>
 			<li class="nav-item">
-				<a href="" class="nav-link" id="showLogin" data-toggle="modal" data-target="#loginModal">Login</a>
+				<a href="" class="nav-link" id="showLogin" data-toggle="modal" data-target="#loginModal"><strong>Login</strong></a>
+			</li>
+			<li class="nav-item">
+				<a href="" class="nav-link" id="signOut"><strong>Sign Out</strong></a>
 			</li>
 		</ul>
 	</nav>
@@ -81,39 +84,53 @@
 	<!-- LOGIN MODAL- END -->
 
 	<div class="container">
-		<div class="card">
-			<div class="card-header">
-				<h1 class="text-center">Rock, Paper, Scissors!</h1>
+		<div class="row">
+			<div class="col-md-9">
+				<div class="card">
+					<div class="card-header">
+						<h1 class="text-center">Rock, Paper, Scissors!</h1>
+						<button id="startGame">Start Game</button>
+						<button id="joinGame">Join Game</button>
+					</div>
+
+					<div class="card-body" id="mainContent">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="card" id="player1">
+									<div class="card-body">
+										<h5 class="card-title">PLAYER 1</h5>
+										<p class="card-text">Stats:</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="card" id="player2">
+									<div class="card-body">
+										<h5 class="card-title">Player 2</h5>
+										<p class="card-text">Stats:</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="selectRPS">
+							<button class="rpsButton"><img src="./assets/images/rock.jpg" alt="rock"></button>
+							<button class="rpsButton"><img src="./assets/images/paper.jpg" alt="paper"></button>
+							<button class="rpsButton"><img src="./assets/images/scissors.jpg" alt="scissors"></button>
+
+						</div>
+					</div>
+				</div>
+
 			</div>
-
-			<div class="card-body" id="mainContent">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card" id="player1">
-							<div class="card-body">
-								<h5 class="card-title">PLAYER 1</h5>
-								<p class="card-text">Stats:</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="card" id="player2">
-							<div class="card-body">
-								<h5 class="card-title">Player 2</h5>
-								<p class="card-text">Stats:</p>
-							</div>
-						</div>
-					</div>
+			<div class="col-md-3">
+				<div id="chat">
+					<div id="displayMessage"></div>
 				</div>
-				<div id="selectRPS">
-					<button><img src="./assets/images/rock.jpg" alt="rock"></button>
-					<button><img src="./assets/images/paper.jpg" alt="paper"></button>
-					<button><img src="./assets/images/scissors.jpg" alt="scissors"></button>
-
-				</div>
+				<textarea class="form-control" id="typeMessage" placeholder="Type your message..."></textarea>
 			</div>
 		</div>
 	</div>
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

@@ -1,13 +1,22 @@
 nav {
 	height: 80px;
 }
+
 .navbar-brand {
 	color: #00A3CC;
 	font-size: 36px;
 }
 
-#login {
-	background-color: #BDBDBD;
+a{
+	color: #00A3CC;
+	font-size: 18px;
+}
+
+#startGame, #joinGame {
+color: #00A3CC;
+border: 2px solid #00A3CC;
+font-size: 18px; 
+margin: 10px 25px 10px 25px;
 }
 
 .container{
@@ -19,7 +28,7 @@ img {
 	width: 75px;
 }
 
-button {
+.rpsButton {
 	margin: 50px;
 	background-color: yellow;
 }
@@ -34,10 +43,34 @@ button {
 }
 
 .card {
-	margin: 50px;
+	/* margin: 50px; */
 	text-align: center;
 }
 
 #mainContent{
 	background-color: #00A3CC;
 }
+
+#chat{
+	border: 3px solid #BDBDBD;
+	height: 400px;
+	overflow: scroll;
+	overflow-x:auto;
+	}
+
+	#typeMessage {
+		background-color: #BDBDBD;
+	}
+
+	#messageBtn {
+		width: 100%;
+	}
+
+	.chatMsg {
+		background-color: #00A3CC;
+		color: white;
+		margin: 10px;
+		padding: 5px;
+		border-radius: 7px 7px 7px 1px;
+		font-size: 18px;
+		}
