@@ -11,6 +11,18 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$("#showLogin").on("click", function(){
-console.log("you clicked me");
+$("#submitSignUp").on("click", function(){
+	var username = $("#username").val().trim();
+	var email = $("#email").val().trim();
+	var password = $("#password").val().trim();
+	console.log("USER: " + username);
+	console.log("email: " + email);
+	console.log("password: " + password);
+});
+
+$("#submitLogin").on("click", function(){
+	var email = $("#loginEmail").val().trim();
+	var password = $("#LoginPsw").val().trim();
+	console.log("email: " + email);
+	console.log("password: " + password);
 });
