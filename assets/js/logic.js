@@ -10,8 +10,7 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
-
-
+var key;
 
 //Create a Firebase User using Navbar-Register
 $("#submitSignUp").on("click", function (user) {
@@ -22,7 +21,7 @@ $("#submitSignUp").on("click", function (user) {
 	console.log("email: " + email);
 	console.log("password: " + password);
 	firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
-		user.updateProfile({displayName: displayName});
+		user.updateProfile({ displayName: displayName });
 	}).catch(function (error) {
 		console.log(error);
 	});
@@ -64,12 +63,12 @@ $("#typeMessage").keypress(function (e) {
 	}
 });
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log("User Signed In");
-  } else {
-    console.log("User Signed Out");
-  }
+firebase.auth().onAuthStateChanged(function (user) {
+	if (user) {
+		console.log("User Signed In");
+	} else {
+		console.log("User Signed Out");
+	}
 });
 
 var state = {
@@ -80,8 +79,8 @@ var state = {
 function newGame() {
 	var user = firebase.auth().currentUser;
 	var currentGame = {
-		creator: { uid: user.uid, displayName: user.displayName},
-		state: state.open
+		creator: { uid: user.uid, displayName: user.displayName },
+		state: state.open,
 	};
 	database.ref("/games").push().set(currentGame);
 	console.log(currentGame);
@@ -90,5 +89,21 @@ function newGame() {
 
 $("#startGame").on("click", newGame);
 
-var user = firebase.auth().currentUser;
+database.ref("/games").on("child_added",function(snap){
+	console.log(snap.key);
+	key = snap.key;
+})
 
+function joinGame() {
+	console.log("you clicked me");
+	var user = firebase.auth().currentUser;
+	var gameLocation = database.ref("/games").child(key);
+	gameLocation.transaction(function (currentGame) {
+		if (!currentGame.joiner) {
+			currentGame.state = state.joined;
+			currentGame.joiner = { uid: user.uid, displayName: user.displayName };
+		}
+		return currentGame;
+	})
+}
+$("#joinGame").on("click", joinGame);
