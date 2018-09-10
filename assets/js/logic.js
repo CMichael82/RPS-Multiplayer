@@ -11,16 +11,18 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+
+
 //Create a Firebase User using Navbar-Register
-$("#submitSignUp").on("click", function () {
-	var username = $("#username").val().trim();
+$("#submitSignUp").on("click", function (user) {
+	var displayName = $("#username").val().trim();
 	var email = $("#email").val().trim();
 	var password = $("#password").val().trim();
 	console.log("USER: " + username);
 	console.log("email: " + email);
 	console.log("password: " + password);
 	firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
-		user.updateProfile({ "username": username.value });
+		user.updateProfile({displayName: displayName});
 	}).catch(function (error) {
 		console.log(error);
 	});
@@ -52,12 +54,41 @@ $("#signOut").on("click", function () {
 
 
 $("#typeMessage").keypress(function (e) {
-	if(e.which == 13) {
-	var message = $("#typeMessage").val().trim();
-	var displayMessage = $("<p class='chatMsg'>").html(message);
-	$("#displayMessage").append(displayMessage);
-	console.log(message);
-	$("#typeMessage").val("");
-	event.preventDefault();
+	if (e.which == 13) {
+		var message = $("#typeMessage").val().trim();
+		var displayMessage = $("<p class='chatMsg'>").html(message);
+		$("#displayMessage").append(displayMessage);
+		console.log(message);
+		$("#typeMessage").val("");
+		event.preventDefault();
 	}
 });
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    console.log("User Signed In");
+  } else {
+    console.log("User Signed Out");
+  }
+});
+
+var state = {
+	open: 1,
+	joined: 2,
+};
+
+function newGame() {
+	var user = firebase.auth().currentUser;
+	var currentGame = {
+		creator: { uid: user.uid, displayName: user.displayName},
+		state: state.open
+	};
+	database.ref("/games").push().set(currentGame);
+	console.log(currentGame);
+	$("#startGame").hide();
+}
+
+$("#startGame").on("click", newGame);
+
+var user = firebase.auth().currentUser;
+
